@@ -159,7 +159,7 @@ If you access the GitHub repository via SSH, use `uvx --from git+ssh://github.co
       "command": "uvx",
       "args": [
         "--from",
-        "git+ssh://github.com/ka1222te/growi-mcp",
+        "git+ssh://git@github.com/ka1222te/growi-mcp",
         "growi-mcp"
       ],
       "env": {
