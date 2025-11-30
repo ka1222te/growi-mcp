@@ -2,6 +2,10 @@
 
 Growi MCP is an MCP server designed for Growi, an open-source wiki tool that streamlines information sharing and knowledge management.
 
+
+[![PyPI - Version](https://img.shields.io/pypi/v/growi-mcp)](https://badge.fury.io/py/growi-mcp) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/growi-mcp?style=flat)](https://pypi.org/project/growi-mcp/)
+[![PyPI - License](https://img.shields.io/pypi/l/growi-mcp)](https://github.com/ka1222te/growi-mcp/blob/main/README.md)
+
 ## Overview
 
 This project provides an unofficial MCP server that acts as a proxy to perform various operations such as retrieving page lists, reading and writing pages, creating and updating pages, etc. Internally, it uses the Growi REST API.

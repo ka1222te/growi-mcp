@@ -2,6 +2,9 @@
 
 Growi MCPは，情報共有やナレッジ管理を効率化するためのオープンソースWikiツールであるGrowiに対応したMCPサーバである．
 
+[![PyPI - Version](https://img.shields.io/pypi/v/growi-mcp)](https://badge.fury.io/py/growi-mcp) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/growi-mcp?style=flat)](https://pypi.org/project/growi-mcp/)
+[![PyPI - License](https://img.shields.io/pypi/l/growi-mcp)](https://github.com/ka1222te/growi-mcp/blob/main/README.md)
+
 ## 概要
 
 ページリストの取得，ページの読み書き，作成，更新など様々な処理を代理で実行する非公式MCPサーバを提供する．内部ではGrowi REST APIを使用している．
@@ -120,7 +123,7 @@ GROWI_API_VERSION="3"
 
   `/path/to/growi-mcp` は，Growi MCPのインストールディレクトリに置き換えること．
 
-#### GitHubリポジトリから直接MCPサーバを起動
+#### GitHubリポジトリから直接MCPサーバを起動(HTTPS)
 
   GitHubリポジトリから直接MCPサーバを起動する場合は，Cline/Cursor/Claude CodeなどのAIコーディングツールの設定ファイル(JSONファイル)に以下のような設定を追加する．
 
@@ -145,7 +148,59 @@ GROWI_API_VERSION="3"
 }
 ```
 
-  GitHubリポジトリへSSHでアクセスする場合は代わりに `uvx --from git+ssh://github.com/ka1222te/growi-mcp growi-mcp` を使用する．なお，"env"の中にそれぞれ対応する環境変数を記述する必要がある．
+  "env"の中にそれぞれ対応する環境変数を記述すること．
+
+#### GitHubリポジトリから直接MCPサーバを起動(SSH)
+
+  GitHubリポジトリへSSHでアクセスする場合は代わりに以下のような設定を行う．
+
+```json
+{
+  "mcpServers": {
+    "growi-mcp": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+ssh://git@github.com/ka1222te/growi-mcp",
+        "growi-mcp"
+      ],
+      "env": {
+        "GROWI_DOMAIN": "http://growi.example.com",
+        "GROWI_API_TOKEN": "your_access_token_here",
+        "GROWI_API_VERSION": "3",
+        "GROWI_CONNECT_SID": "your_connect_sid_here(Optional)" 
+      }
+    }
+  }
+}
+```
+
+  "env"の中にそれぞれ対応する環境変数を記述すること．
+
+#### PyPIプロジェクトから直接MCPサーバを起動
+
+  `uvx` コマンドを用いてPyPIプロジェクトから直接MCPサーバを起動する．
+
+```json
+{
+  "mcpServers": {
+    "growi-mcp": {
+      "command": "uvx",
+      "args": [
+        "growi-mcp"
+      ],
+      "env": {
+        "GROWI_DOMAIN": "http://growi.example.com",
+        "GROWI_API_TOKEN": "your_access_token_here",
+        "GROWI_API_VERSION": "3",
+        "GROWI_CONNECT_SID": "your_connect_sid_here(Optional)" 
+      }
+    }
+  }
+}
+```
+
+  "env"の中にそれぞれ対応する環境変数を記述すること．
 
 ### MCPツールの使用例
 
