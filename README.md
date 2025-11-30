@@ -121,7 +121,7 @@ Then, add the following configuration to the settings file (JSON) of your AI cod
 
 Replace `/path/to/growi-mcp` with the installation directory of Growi MCP.
 
-#### Start the MCP server directly from the GitHub repository
+#### Start the MCP server directly from the GitHub repository (HTTPS)
 
 To run directly from the GitHub repository, add the following to the settings file (JSON) of your AI coding tool:
 
@@ -146,7 +146,59 @@ To run directly from the GitHub repository, add the following to the settings fi
 }
 ```
 
-If you access the GitHub repository via SSH, use `uvx --from git+ssh://github.com/ka1222te/growi-mcp growi-mcp` instead. Note that you must set each corresponding environment variable in the "env" section.
+Note that you must set each corresponding environment variable in the "env" section.
+
+#### Start the MCP server directly from the GitHub repository (SSH)
+
+If you access the GitHub repository via SSH, use `uvx --from git+ssh://github.com/ka1222te/growi-mcp growi-mcp` instead. 
+
+```json
+{
+  "mcpServers": {
+    "growi-mcp": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+ssh://github.com/ka1222te/growi-mcp",
+        "growi-mcp"
+      ],
+      "env": {
+        "GROWI_DOMAIN": "http://growi.example.com",
+        "GROWI_API_TOKEN": "your_access_token_here",
+        "GROWI_API_VERSION": "3",
+        "GROWI_CONNECT_SID": "your_connect_sid_here(Optional)" 
+      }
+    }
+  }
+}
+```
+
+Note that you must set each corresponding environment variable in the "env" section.
+
+#### Start the MCP server directly from the PyPI project
+
+Use the `uvx` command to start the MCP server directly from the PyPI project.
+
+```json
+{
+  "mcpServers": {
+    "growi-mcp": {
+      "command": "uvx",
+      "args": [
+        "growi-mcp"
+      ],
+      "env": {
+        "GROWI_DOMAIN": "http://growi.example.com",
+        "GROWI_API_TOKEN": "your_access_token_here",
+        "GROWI_API_VERSION": "3",
+        "GROWI_CONNECT_SID": "your_connect_sid_here(Optional)" 
+      }
+    }
+  }
+}
+```
+
+Note that you must set each corresponding environment variable in the "env" section.
 
 ### Examples: Using MCP Tools
 
