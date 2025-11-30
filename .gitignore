@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+docs/
+attachment/
+.pytest_cache/
+tests/
+wheels/
+*.egg-info
+rules.md
+growi_api.py
+
+
+# Virtual environments
+.venv
+.env
