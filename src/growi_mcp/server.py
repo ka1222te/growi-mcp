@@ -13,6 +13,7 @@ Tools:
   - remove_page(path_or_id*, recursively)
   - search_pages(query*, path, limit, offset)
   - get_user_names(query*, limit, offset)
+  - register_user(name*, username*, email*, password*)
   - upload_attachment(path_or_page_id*, file_path*)
   - get_attachment_list(path_or_id*, limit, offset)
   - get_attachment_info(attachment_id*)
@@ -291,6 +292,30 @@ class GrowiClient:
         if res.status_code in {400, 401, 403, 404, 409, 422}: raise RuntimeError(f"Growi API error ({res.status_code}): {res.text}")
         return res.json()
 
+    async def register_user(self, name: str, username: str, email: str, password: str) -> Dict[str, Any]:
+        """Register a user to wiki."""
+        if self.version == "1":
+            url = "/_api/register"
+            data = {
+                "registerForm[name]": name,
+                "registerForm[username]": username,
+                "registerForm[email]": email,
+                "registerForm[password]": password,
+            }
+        elif self.version == "3":
+            url = "/_api/v3/register"
+            data = {
+                "registerForm[name]": name,
+                "registerForm[username]": username,
+                "registerForm[email]": email,
+                "registerForm[password]": password,
+            }
+        else:
+            raise RuntimeError(f"Your Growi REST API version '{self.version}' is not available for register_user")
+        res = await self._client.post(url, params=self._with_token(), data=data)
+        if res.status_code in {400, 401, 403, 404, 409, 422}: raise RuntimeError(f"Growi API error ({res.status_code}): {res.text}")
+        return res.json()
+
     async def upload_attachment(
         self,
         path_or_page_id: str,
@@ -560,6 +585,28 @@ def create_server() -> FastMCP:
         try:
             await ctx.info(f"get_user_names({query}, limit={limit}, offset={offset})")
             data = await client.get_user_names(query, limit=limit, offset=offset)
+        except Exception as e:
+            await ctx.error(str(e))
+            raise e
+        return json.dumps(data, ensure_ascii=False, indent=2)
+
+    @server.tool()
+    async def register_user(ctx: Context, name: str, username: str, email: str, password: str) -> str:
+        """
+            Register a user to wiki.
+        
+            Args:
+                name (str): Name for a user. This name is used for display.
+                username (str): User name for a user. This name is used for login.
+                email (str): Email for a user.
+                password (str): Password for a user. Password minimum character should be more than 8 characters.
+            Returns:
+                JSON string.
+        """
+        client = await get_client()
+        try:
+            await ctx.info(f"register_user(name={name}, username={username}, email={email}, password={password})")
+            data = await client.register_user(name=name, username=username, email=email, password=password)
         except Exception as e:
             await ctx.error(str(e))
             raise e

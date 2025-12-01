@@ -29,6 +29,8 @@ This project provides an unofficial MCP server that acts as a proxy to perform v
     - Search for pages that match the query
   - get_user_names(query*, limit, offset)
     - Retrieve user names that match the query
+  - register_user(name*, username*, email*, password*)
+      - Register a user to wiki (Depending on settings, administrator approval may be required)
   - upload_attachment(page_id_or_path*, file_path*)
     - Upload and attach a file to a page (by page ID or path)
   - get_attachment_list(path_or_id*, limit, offset)
@@ -64,7 +66,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ### Start the MCP server
 
-Two ways to start the MCP server for use with Cline/Cursor are shown below.
+Some ways to start the MCP server for use with Cline/Cursor are shown below.
 
 #### Clone the GitHub repository and start the MCP server
 
@@ -247,4 +249,4 @@ If you enable “Auto-approve” for update operations, there is a risk of unint
 
 ## License
 
-This project is released under the MIT License. For details, refer to the [LICENSE](LICENSE) file.
+This project is released under the MIT License. For details, refer to the [LICENSE](https://github.com/ka1222te/growi-mcp/blob/main/LICENSE) file.

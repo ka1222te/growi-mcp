@@ -28,6 +28,8 @@ Growi MCPは，情報共有やナレッジ管理を効率化するためのオ�
       - クエリに対応するページを検索
     - get_user_names(query*, limit, offset)
       - クエリに対応するユーザ名取得
+    - register_user(name*, username*, email*, password*)
+      - ユーザをwikiに登録する(設定によっては，管理者からの承認が必要)
     - upload_attachment(page_id_or_path*, file_path*)
       - ページ(ページid)へファイルを添付
     - get_attachment_list(path_or_id*, limit, offset)
@@ -62,7 +64,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ### MCPサーバーの起動
 
-  Cline/Cursorを用いたMCPサーバの起動方法について，2つ紹介する．
+  Cline/Cursorを用いたMCPサーバの起動方法について，いくつか紹介する．
 
 #### GitHubリポジトリをクローンしてMCPサーバを起動
 
@@ -245,4 +247,4 @@ wikiに存在している全員のユーザを一覧にして表示して．
 
 ## ライセンス
 
-このプロジェクトはMITライセンスの下で公開されている．詳細は[LICENSE](LICENSE)ファイルを参照すること．
+このプロジェクトはMITライセンスの下で公開されている．詳細は[LICENSE](https://github.com/ka1222te/growi-mcp/blob/main/LICENSE)ファイルを参照すること．
